@@ -11,7 +11,6 @@ import Typography from '@mui/material/Typography';
 import MenuItem from '@mui/material/MenuItem';
 import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
-import ToggleColorMode from './ToggleColorMode';
 
 const logoStyle = {
   width: '140px',
@@ -19,7 +18,7 @@ const logoStyle = {
   cursor: 'pointer',
 };
 
-function Home({ mode, toggleColorMode }) {
+function Home() {
   const [open, setOpen] = React.useState(false);
 
   const toggleDrawer = (newOpen) => () => {
@@ -140,14 +139,13 @@ function Home({ mode, toggleColorMode }) {
                 alignItems: 'center',
               }}
             >
-              <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} />
               <Button
                 color="primary"
                 variant="text"
                 size="small"
                 component="a"
-                href="/material-ui/getting-started/templates/sign-in/"
-                target="_blank"
+                href="signin"
+                target="_self"
               >
                 Sign in
               </Button>
@@ -156,8 +154,8 @@ function Home({ mode, toggleColorMode }) {
                 variant="contained"
                 size="small"
                 component="a"
-                href="/material-ui/getting-started/templates/sign-up/"
-                target="_blank"
+                href="/signup"
+                target="_self"
               >
                 Sign up
               </Button>
@@ -189,7 +187,6 @@ function Home({ mode, toggleColorMode }) {
                       flexGrow: 1,
                     }}
                   >
-                    <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} />
                   </Box>
                   <MenuItem onClick={() => scrollToSection('features')}>
                     Features
@@ -210,7 +207,7 @@ function Home({ mode, toggleColorMode }) {
                       color="primary"
                       variant="contained"
                       component="a"
-                      href="/material-ui/getting-started/templates/sign-up/"
+                      href="/signup"
                       target="_blank"
                       sx={{ width: '100%' }}
                     >
@@ -222,7 +219,7 @@ function Home({ mode, toggleColorMode }) {
                       color="primary"
                       variant="outlined"
                       component="a"
-                      href="/material-ui/getting-started/templates/sign-in/"
+                      href="/signin"
                       target="_blank"
                       sx={{ width: '100%' }}
                     >
