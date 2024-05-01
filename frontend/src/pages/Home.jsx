@@ -232,6 +232,7 @@ function Home() {
           </Toolbar>
         </Container>
       </AppBar>
+      <p>This is the body.</p>
     </div>
   );
 }
