@@ -50,14 +50,14 @@ export default function SignUp() {
       password, 
       checkbox
     }
-    console.log(data)
-    // axios.post("http://localhost:5000/user", data)
-    // .then((response) => {
-    //  console.log(response.data)
-    // })
-    // .catch((error) => {
-    //   console.log(error)
-    // })
+   // console.log(data)
+    axios.post("http://localhost:5000/user", data)
+    .then((response) => {
+     console.log(response)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
     }
     catch(error){
      console.log(error)
@@ -137,7 +137,7 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel
-                  control={<Checkbox value={(e) => {setCheckbox(e.currentTarget)}} color="primary" />}
+                  control={<Checkbox value={checkbox} onChange={() => {setCheckbox((prev) => !prev)}} color="primary" />}
                   label="I want to receive inspiration, marketing promotions and updates via email."
                 />
               </Grid>
