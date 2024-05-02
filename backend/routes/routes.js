@@ -70,7 +70,7 @@ router.post("/check-user", async(req, res) => {
     //Check if the email exists  
     const user = await User.find({email}) 
     if(!user){
- res.status(400).json({
+     res.status(400).json({
             msg: "User not found."
         })
     }
@@ -79,6 +79,11 @@ router.post("/check-user", async(req, res) => {
             res.status(200).json({
                 msg: "Authorized.", 
                 user
+            })
+        }
+        else{
+            res.status(400).json({
+                msg: "Incorrect Credentials."
             })
         }
     }    
