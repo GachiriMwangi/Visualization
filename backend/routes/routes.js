@@ -65,6 +65,15 @@ console.log(error)
 }
 }) 
 
+router.post("/check-user", async(req, res) => {
+    const {email, password } = req.body 
+    //Check if the email exists  
+    const user = await User.find({email}) 
+    if(user){
+        console.log("The user has been found")
+    }    
+})
+
 //Update a book
 router.put("/books/:id", async (req, res) => {
     try{
