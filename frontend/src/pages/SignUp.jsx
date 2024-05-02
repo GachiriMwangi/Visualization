@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
+import { useSnackbar } from "notistack"
 import Avatar from '@mui/material/Avatar'
 import Button from '@mui/material/Button'
 import CssBaseline from '@mui/material/CssBaseline'
@@ -34,6 +35,7 @@ const defaultTheme = createTheme();
 
 export default function SignUp() {
   const navigate = useNavigate()
+  const { enqueueSnackbar } = useSnackbar()
   const [firstname, setFirstName] = useState('')
   const [lastname, setLastName] = useState('')
   const [email, setEmail] = useState('')
@@ -52,21 +54,36 @@ export default function SignUp() {
     }
    // console.log(data)
     axios.post("http://localhost:5000/user", data)
-    .then((response) => {
-     console.log(response)
+    .then(() => {
+      setFirstName("") 
+      setLastName("")
+      setEmail("") 
+      setPassword("") 
+      setCheckbox(false)
+      enqueueSnackbar("Signed up successfully", {
+        variant: "success"
+      })
+     navigate("/")
     })
     .catch((error) => {
+      enqueueSnackbar("There was an error when signing you in", {
+        variant: "eror"
+      })
+      navigate("/signup")
       console.log(error)
     })
     }
     catch(error){
+      enqueueSnackbar("An unexpected error occurred when signing you in", {
+        variant: "error"
+      })
      console.log(error)
     }
 
   };
-
+//
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={defaultTheme} >
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
