@@ -57,7 +57,7 @@ const newUser = {
 
 const user = await User.create(newUser)
 
-return res.status(201).send(user)
+return res.status(201).json(user)
 
 }
 catch(error){
@@ -69,8 +69,18 @@ router.post("/check-user", async(req, res) => {
     const {email, password } = req.body 
     //Check if the email exists  
     const user = await User.find({email}) 
-    if(user){
-        console.log("The user has been found")
+    if(!user){
+ res.status(400).json({
+            msg: "User not found."
+        })
+    }
+    else{
+        if(user.password === password){
+            res.status(200).json({
+                msg: "Authorized.", 
+                user
+            })
+        }
     }    
 })
 
