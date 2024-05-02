@@ -1,4 +1,5 @@
-import * as React from 'react'; 
+import React, { useState } from 'react'; 
+import axios from "axios"
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -31,14 +32,29 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function SignIn() {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    try{
+    const data = {
+      email, 
+      password
+    }
+    axios.post("http://localhost:5000/check-user", data)
+    .then((response) => {
+      console.log(response.data)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+    }
+    catch(error){
+
+    }
     
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+
   };
 
   return (
@@ -64,6 +80,8 @@ export default function SignIn() {
               margin="normal"
               required
               fullWidth
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               id="email"
               label="Email Address"
               name="email"
@@ -74,6 +92,8 @@ export default function SignIn() {
               margin="normal"
               required
               fullWidth
+              value={password} 
+              onChange={(e) => setPassword(e.target.value)}
               name="password"
               label="Password"
               type="password"
