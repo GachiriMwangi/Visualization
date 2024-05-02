@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, {useState} from 'react'
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
 import Avatar from '@mui/material/Avatar'
@@ -34,20 +34,33 @@ const defaultTheme = createTheme();
 
 export default function SignUp() {
   const navigate = useNavigate()
+  const [firstname, setFirstName] = useState('')
+  const [lastname, setLastName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [checkbox, setCheckbox] = useState(false)
+
   const handleSubmit = (event) => {
     event.preventDefault();
     try{
-    const data = new FormData(event.currentTarget);
-    axios.post("http://localhost:5000/user", data)
-    .then((response) => {
-     console.log(response.data)
-    })
-    .catch((error) => {
-      console.log(error)
-    })
+    const data = {
+      firstname, 
+      lastname, 
+      email, 
+      password, 
+      checkbox
+    }
+    console.log(data)
+    // axios.post("http://localhost:5000/user", data)
+    // .then((response) => {
+    //  console.log(response.data)
+    // })
+    // .catch((error) => {
+    //   console.log(error)
+    // })
     }
     catch(error){
-console.log(error)
+     console.log(error)
     }
 
   };
@@ -78,6 +91,8 @@ console.log(error)
                   name="firstName"
                   required
                   fullWidth
+                  onChange={(e) => {setFirstName(e.target.value)}}
+                  value={firstname}
                   id="firstName"
                   label="First Name"
                   autoFocus
@@ -87,6 +102,8 @@ console.log(error)
                 <TextField
                   required
                   fullWidth
+                  value={lastname}
+                  onChange={(e) => {setLastName(e.target.value)}}
                   id="lastName"
                   label="Last Name"
                   name="lastName"
@@ -97,6 +114,8 @@ console.log(error)
                 <TextField
                   required
                   fullWidth
+                  value={email}
+                  onChange={(e) => {setEmail(e.target.value)}}
                   id="email"
                   label="Email Address"
                   name="email"
@@ -107,6 +126,8 @@ console.log(error)
                 <TextField
                   required
                   fullWidth
+                  onChange={(e) => {setPassword(e.target.value)}}
+                  value={password}
                   name="password"
                   label="Password"
                   type="password"
@@ -116,7 +137,7 @@ console.log(error)
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
+                  control={<Checkbox value={(e) => {setCheckbox(e.currentTarget)}} color="primary" />}
                   label="I want to receive inspiration, marketing promotions and updates via email."
                 />
               </Grid>
